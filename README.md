@@ -14,26 +14,26 @@ currently are arrays only supported with a single type.
 it is not checked if the prop is number/string.
 invalid props are just removed, it will not throw errors.
 
-I plan to use it with mongodb. Together with monk and superstruct,
-it will be a good alternative for mongoose and fit to the dao definitions.
-
+I plan to use it with mongodb. Together with [monk](https://npmjs.com/packages/monk) and [superstruct](https://npmjs.com/packages/superstruct),
+it will be a good alternative for mongoose and fit to the dao definitions. 
+This module is needed not to push big uncontrolled objects into each document.
 
 ```js
-const tpick = require('./tpick');
-var namePicker = tpick.createPicker({
-    name: "valid",
+const tpick = require('tpicker');
+var userPicker = tpick.createPicker({
+    name: "string",
     address: {
-        street: 'someStreet',
+        street: 'string',
         number: "a",
     },
     images: [{
-        title: 'title',
-        url: 'theURL',
+        title: 'string',
+        url: 'string',
         tags: []
     }]
 });
 
-var user1 = namePicker({
+var user1 = userPicker({
     name: 'Tobias',
     otherProp: "invalid",
     address: {
@@ -54,3 +54,10 @@ var user1 = namePicker({
 });
 
 ```
+
+## implementation
+The schema object get traversed recursive, to create a method as a string.
+child objects also get written into a method string. using *eval* the dynamic created
+method get created and returned to be used. so: this method should only be used for 
+static definitions and not for user-input. The result is an extreamly fast pick method.
+
