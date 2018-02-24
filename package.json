@@ -1,0 +1,7 @@
+{
+    "name": "tpicker",
+    "description": "fast deep pick library",
+    "version": "0.0.0",
+    "license": "MIT",
+    "dependencies": {}
+}
