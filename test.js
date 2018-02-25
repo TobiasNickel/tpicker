@@ -9,7 +9,8 @@ var namePicker = tpick.createPicker({
         title: 'title',
         url: 'theURL',
         tags: []
-    }]
+    }],
+    tags: ['string']
 });
 
 var user1 = namePicker({

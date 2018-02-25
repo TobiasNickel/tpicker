@@ -22,7 +22,10 @@ function schemaToMethodString(schema, subTypes) {
                 if (!schema[propName].length) {
                     // array of value
                     method += "out." + propName + '=item.' + propName + '.filter(subItem=>typeof subItem!=="object");';
+                } else if (typeof(schema[propName][0]) !== 'object') {
+                    method += "out." + propName + '=item.' + propName + '.filter(subItem=>typeof subItem!=="object");';
                 } else {
+
                     var className = '_' + randomString(10);
                     subTypes[className] = schemaToMethodString(schema[propName][0], subTypes);
 
